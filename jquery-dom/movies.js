@@ -78,3 +78,72 @@ $('#sortRating').on('click', function () {
     }
 
 })
+
+$('#sortTitle').on('click', function () {
+    if ($('#sortTitle').html() === "↑") {
+        $('#sortTitle').html('&#8595;')
+        let data = movies.sort(function (a, b) {
+            var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+            var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+            if (titleA < titleB) {
+                return -1;
+            }
+            if (titleA > titleB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
+        for (let i = 0; i < movies.length; i++) {
+            movies[i].id = i;
+        }
+        $('#tableBody').empty();
+        for (let movie of data) {
+            $('#tableBody').append(`
+          <tr>
+            <td style="padding:10px;">${movie.title}</td>
+            <td style="padding:10px;">${movie.rating}</td>
+            <td style="padding:10px;">
+              <button class="delete" id=${movie.id}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        `)
+        }
+
+    } else {
+        $('#sortTitle').html('&#8593;')
+        let data = movies.sort(function (a, b) {
+            var titleA = a.title.toUpperCase(); // ignore upper and lowercase
+            var titleB = b.title.toUpperCase(); // ignore upper and lowercase
+            if (titleA > titleB) {
+                return -1;
+            }
+            if (titleA < titleB) {
+                return 1;
+            }
+
+            // names must be equal
+            return 0;
+        });
+        for (let i = 0; i < movies.length; i++) {
+            movies[i].id = i;
+        }
+        $('#tableBody').empty();
+        for (let movie of data) {
+            $('#tableBody').append(`
+          <tr>
+            <td style="padding:10px;">${movie.title}</td>
+            <td style="padding:10px;">${movie.rating}</td>
+            <td style="padding:10px;">
+              <button class="delete" id=${movie.id}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        `)
+        }
+    }
+})
