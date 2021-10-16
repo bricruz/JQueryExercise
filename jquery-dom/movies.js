@@ -31,15 +31,17 @@ $('#tableBody').on('click', ".delete", function () {
 })
 
 $('#sortRating').on('click', function () {
-    let data = movies.sort(function (a, b) {
-        return a.rating - b.rating;
-    });
-    for (let i = 0; i < movies.length; i++) {
-        movies[i].id = i;
-    }
-    $('#tableBody').empty();
-    for (let movie of data) {
-        $('#tableBody').append(`
+    if ($('#sortRating').html() === "↓") {
+        $('#sortRating').html('&#8593;')
+        let data = movies.sort(function (a, b) {
+            return a.rating - b.rating;
+        });
+        for (let i = 0; i < movies.length; i++) {
+            movies[i].id = i;
+        }
+        $('#tableBody').empty();
+        for (let movie of data) {
+            $('#tableBody').append(`
           <tr>
             <td style="padding:10px;">${movie.title}</td>
             <td style="padding:10px;">${movie.rating}</td>
@@ -50,6 +52,29 @@ $('#sortRating').on('click', function () {
             </td>
           </tr>
         `)
+        }
+    } else {
+        $('#sortRating').html('&#8595;')
+        let data = movies.sort(function (a, b) {
+            return b.rating - a.rating;
+        });
+        for (let i = 0; i < movies.length; i++) {
+            movies[i].id = i;
+        }
+        $('#tableBody').empty();
+        for (let movie of data) {
+            $('#tableBody').append(`
+          <tr>
+            <td style="padding:10px;">${movie.title}</td>
+            <td style="padding:10px;">${movie.rating}</td>
+            <td style="padding:10px;">
+              <button class="delete" id=${movie.id}>
+                Delete
+              </button>
+            </td>
+          </tr>
+        `)
+        }
     }
 
 })
