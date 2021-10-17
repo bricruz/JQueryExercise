@@ -40,19 +40,7 @@ $('#sortRating').on('click', function () {
             movies[i].id = i;
         }
         $('#tableBody').empty();
-        for (let movie of data) {
-            $('#tableBody').append(`
-          <tr>
-            <td style="padding:10px;">${movie.title}</td>
-            <td style="padding:10px;">${movie.rating}</td>
-            <td style="padding:10px;">
-              <button class="delete" id=${movie.id}>
-                Delete
-              </button>
-            </td>
-          </tr>
-        `)
-        }
+        createTable(data);
     } else {
         $('#sortRating').html('&#8595;')
         let data = movies.sort(function (a, b) {
@@ -62,19 +50,7 @@ $('#sortRating').on('click', function () {
             movies[i].id = i;
         }
         $('#tableBody').empty();
-        for (let movie of data) {
-            $('#tableBody').append(`
-          <tr>
-            <td style="padding:10px;">${movie.title}</td>
-            <td style="padding:10px;">${movie.rating}</td>
-            <td style="padding:10px;">
-              <button class="delete" id=${movie.id}>
-                Delete
-              </button>
-            </td>
-          </tr>
-        `)
-        }
+        createTable(data);
     }
 
 })
@@ -99,19 +75,7 @@ $('#sortTitle').on('click', function () {
             movies[i].id = i;
         }
         $('#tableBody').empty();
-        for (let movie of data) {
-            $('#tableBody').append(`
-          <tr>
-            <td style="padding:10px;">${movie.title}</td>
-            <td style="padding:10px;">${movie.rating}</td>
-            <td style="padding:10px;">
-              <button class="delete" id=${movie.id}>
-                Delete
-              </button>
-            </td>
-          </tr>
-        `)
-        }
+        createTable(data);
 
     } else {
         $('#sortTitle').html('&#8593;')
@@ -132,18 +96,21 @@ $('#sortTitle').on('click', function () {
             movies[i].id = i;
         }
         $('#tableBody').empty();
-        for (let movie of data) {
-            $('#tableBody').append(`
-          <tr>
-            <td style="padding:10px;">${movie.title}</td>
-            <td style="padding:10px;">${movie.rating}</td>
-            <td style="padding:10px;">
-              <button class="delete" id=${movie.id}>
-                Delete
-              </button>
-            </td>
-          </tr>
-        `)
-        }
+        createTable(data);
     }
 })
+function createTable(data) {
+    for (let movie of data) {
+        $('#tableBody').append(`
+      <tr>
+        <td style="padding:10px;">${movie.title}</td>
+        <td style="padding:10px;">${movie.rating}</td>
+        <td style="padding:10px;">
+          <button class="delete" id=${movie.id}>
+            Delete
+          </button>
+        </td>
+      </tr>
+    `)
+    }
+}
